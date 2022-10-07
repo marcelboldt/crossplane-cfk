@@ -1,0 +1,17 @@
+# this creates a dev cluster
+# it is a claim created in the dev namespace - it will create a XR triggering the deployment of the CP resources
+---
+apiVersion: xp.platform.confluent.io/v1alpha1
+kind: CPCluster
+metadata:
+  # TODO propagate stuff
+  namespace: confluent
+  name: dev-cp-cluster
+  annotations:
+    crossplane.io/external-name: dev
+spec:
+  compositionRef:
+    name: local-cp-cluster
+  parameters:
+    zkNodes: 1
+    storageGB: 2

@@ -1,0 +1,49 @@
+---
+# deploy CP resources
+# source https://github.com/crossplane-contrib/provider-kubernetes/blob/main/examples/object/object.yaml
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  name: ns-confluent
+spec:
+  forProvider:
+    manifest:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        # name in manifest is optional and defaults to Object name
+        name: cp
+        labels:
+          example: "true"
+  providerConfigRef:
+    name: local
+
+---
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  name: zookeeper
+spec:
+  forProvider:
+    manifest:
+      apiVersion: platform.confluent.io/v1beta1
+      kind: Zookeeper
+      metadata:
+        namespace: cp
+        labels:
+          cp: "true"
+      spec:
+          replicas: 1
+          image:
+            application: confluentinc/cp-zookeeper:7.0.0
+            init: confluentinc/confluent-init-container:2.2.0
+          dataVolumeCapacity: 1Gi
+          logVolumeCapacity: 1Gi
+#           authentication:
+#             type: digest
+#             jaasConfig:
+#               secretRef: credential
+#           tls:
+#             secretRef: tls-group1
+  providerConfigRef:
+    name: local

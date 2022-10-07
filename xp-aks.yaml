@@ -1,0 +1,23 @@
+---
+apiVersion: azure.crossplane.io/v1alpha3
+kind: ResourceGroup
+metadata:
+ name: mbo-xp-aks1
+spec:
+ location: westeurope
+
+---
+apiVersion: compute.azure.crossplane.io/v1alpha3
+kind: AKSCluster
+metadata:
+ name: mboxpaks1
+spec:
+ location: westeurope
+ resourceGroupName: mbo-xp-aks1
+ version: 1.23.8
+ nodeCount: 2
+ nodeVMSize: Standard B4ms
+ deletionPolicy: Delete
+ disableRBAC: true
+ publishConnectionDetailsTo: # writeConnectionSecretToRef
+   name: mboxpaks1-connDetails

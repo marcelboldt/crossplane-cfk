@@ -1,0 +1,42 @@
+---
+# TODO
+# this defines the XR
+# relevant parameters for CP independent of the infrastructure:
+# external ldap configuration
+# components
+# number of nodes
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: clusters.xp.platform.confluent.io
+spec:
+  group: xp.platform.confluent.io
+  names:
+    kind: XCPCluster
+    plural: xcpclusters
+  claimNames:
+    kind: CPCluster
+    plural: cpclusters
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              parameters:
+                type: object
+                properties:
+                  zkNodes:
+                    type: integer
+                  storageGB:
+                    type: integer
+                required:
+                  - zkNodes
+                  - storageGB
+            required:
+              - parameters

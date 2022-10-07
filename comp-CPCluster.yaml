@@ -1,0 +1,91 @@
+---
+# TODO
+# a composition implements a an XR/claim
+# for Confluent platform there will be a composition for
+# + cfk:
+#   - Kubernetes
+#   - OpenShift
+# + cp-ansible:
+#   - Cloud VMs
+#   - on premise
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: local-cp-cluster
+  labels:
+    crossplane.io/xrd: clusters.xp.platform.confluent.io
+    provider: kubernetes
+spec:
+  compositeTypeRef:
+    apiVersion: xp.platform.confluent.io/v1alpha1
+    kind: XCPCluster
+  writeConnectionSecretsToNamespace: crossplane-system
+  resources:
+  - name: confluent-operator
+    base:
+    # installs CfK operator
+      apiVersion: helm.crossplane.io/v1beta1
+      kind: Release
+      metadata:
+        name: confluent-operator
+      spec:
+        providerConfigRef:
+          name: local
+        forProvider:
+          chart:
+            name: confluent-for-kubernetes
+            repository: https://packages.confluent.io/helm
+          set:
+          - name: namespaced
+            value: "true"
+          - name: namespaceList
+            value: "{confluent,cp}"
+          namespace: confluent
+  - name: cp-namespace
+    base:
+      apiVersion: kubernetes.crossplane.io/v1alpha1
+      kind: Object
+      metadata:
+        name: ns-confluent
+      spec:
+        forProvider:
+          manifest:
+            apiVersion: v1
+            kind: Namespace
+            metadata:
+            # name in manifest is optional and defaults to Object name
+              name: cp
+              labels:
+                example: "true"
+        providerConfigRef:
+          name: local
+  - name: zookeeper
+    base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        metadata:
+          name: zookeeper
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: platform.confluent.io/v1beta1
+              kind: Zookeeper
+              metadata:
+                namespace: cp
+                labels:
+                  cp: "true"
+              spec:
+                  replicas: 1
+                  image:
+                    application: confluentinc/cp-zookeeper:7.0.0
+                    init: confluentinc/confluent-init-container:2.2.0
+                  dataVolumeCapacity: 1Gi
+                  logVolumeCapacity: 1Gi
+        #           authentication:
+        #             type: digest
+        #             jaasConfig:
+        #               secretRef: credential
+        #           tls:
+        #             secretRef: tls-group1
+          providerConfigRef:
+            name: local

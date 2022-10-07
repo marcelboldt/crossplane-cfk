@@ -1,0 +1,19 @@
+---
+# installs CfK operator
+apiVersion: helm.crossplane.io/v1beta1
+kind: Release
+metadata:
+  name: confluent-operator
+spec:
+  providerConfigRef:
+    name: local
+  forProvider:
+    chart:
+      name: confluent-for-kubernetes
+      repository: https://packages.confluent.io/helm
+    set:
+      - name: namespaced
+        value: "true"
+      - name: namespaceList
+        value: "{confluent,cp}"
+    namespace: confluent

@@ -1,0 +1,17 @@
+---
+# TODO
+# crossplane package/configurartion metadata
+# build with `$ kubectl crossplane build configuration`- this creates an xpkg file.
+# `$ REG=myrepo; kubectl crossplane pussh configurartion ${REG}/<config-name:version>`
+apiVersion: meta.pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: confluent-platform
+  annotations:
+    provider: azure
+spec:
+  crossplane:
+    version: ">=v1.4.0-0"
+  dependsOn:
+    - provider: crossplane/provider-azure
+      version: ">=v0.13.0"
