@@ -13,7 +13,7 @@ kind: Composition
 metadata:
   name: local-cp-cluster
   labels:
-    crossplane.io/xrd: clusters.xp.platform.confluent.io
+    crossplane.io/xrd: xcpclusters.xp.platform.confluent.io
     provider: kubernetes
 spec:
   compositeTypeRef:
