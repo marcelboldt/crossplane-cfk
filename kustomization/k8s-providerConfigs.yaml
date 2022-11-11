@@ -1,12 +1,4 @@
 ---
-apiVersion: pkg.crossplane.io/v1
-kind: Provider
-metadata:
-  name: provider-kubernetes
-spec:
-  package: "crossplane/provider-kubernetes:main"
-
----
 # source: https://github.com/crossplane-contrib/provider-kubernetes/blob/main/examples/provider/config-in-cluster.yaml
 # Make sure provider-kubernetes has enough permissions to install your objects into cluster
 #

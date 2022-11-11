@@ -1,12 +1,4 @@
 ---
-apiVersion: pkg.crossplane.io/v1
-kind: Provider
-metadata:
- name: provider-helm
-spec:
- package: "crossplane/provider-helm:v0.11.1"
-
----
 apiVersion: helm.crossplane.io/v1beta1
 kind: ProviderConfig
 metadata:
