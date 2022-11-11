@@ -9,7 +9,7 @@
 Flux will do a dry-run which fails as the Provider's ProviderConfig cannot be installed immediately after the Provider.
 It needs some time. Workaround: install the Provider manually:
 ```
-kubectl crossplane install provider crossplane/provider-helm:master
+kubectl crossplane install provider crossplane/provider-helm:v0.11.1
 ```
 
 2. Install Flux

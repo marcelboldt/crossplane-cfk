@@ -11,3 +11,9 @@ spec:
     kind: GitRepository
     name: cfk-crossplane
   targetNamespace: default
+  healthChecks:
+    - apiVersion: "helm.crossplane.io/v1beta1"
+      kind: ProviderConfig
+      name: provider-helm
+      namespace: crossplane-system
+  timeout: 2m
