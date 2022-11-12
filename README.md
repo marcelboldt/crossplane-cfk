@@ -1,18 +1,5 @@
 # Use Flux with this repo
 
-1. Install Crossplane
+TODO: Install Crossplane via Helm provider
 
-1.1 Crossplane System via Helm
-
-1.2 Crossplane providers via XP CLI
-
-Flux will do a dry-run which fails as the Provider's ProviderConfig cannot be installed immediately after the Provider.
-It needs some time. Workaround: install the Provider manually:
-```
-kubectl crossplane install provider crossplane/provider-helm:v0.11.1
-```
-
-2. Install Flux
-
-
-via setup-flux.sh
+Install Flux via setup-flux.sh
