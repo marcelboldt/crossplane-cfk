@@ -68,7 +68,7 @@ spec:
             name: local
     patches:
     - type: PatchSet
-      patchSetName: k8s-tagetNamespace
+      patchSetName: k8s-targetNamespace
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.zkNodes
       toFieldPath: spec.forProvider.manifest.spec.replicas
