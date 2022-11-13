@@ -74,7 +74,7 @@ spec:
       toFieldPath: spec.forProvider.manifest.spec.replicas
    # - type: FromCompositeFieldPath
    #   fromFieldPath: spec.parameters.storageGB
-      toFieldPath: spec.forProvider.manifest.spec.dataVolumeCapacity
+   #   toFieldPath: spec.forProvider.manifest.spec.dataVolumeCapacity
   patchSets:
   - name: k8s-targetNamespace
     patches:
