@@ -2,9 +2,28 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
+  name: base
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  path: ./base
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: cfk-crossplane
+  wait: true
+  timeout: 1m
+  retryInterval: 2m0s
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
   name: crossplane-providers
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: base
   interval: 5m0s
   path: ./providers
   prune: true
