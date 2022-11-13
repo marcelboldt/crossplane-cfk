@@ -37,7 +37,7 @@ spec:
                   zkNodes:
                     type: integer
                   storageGB:
-                    type: string
+                    type: integer
                 required:
                   - zkNodes
                   - storageGB

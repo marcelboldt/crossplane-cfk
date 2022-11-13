@@ -15,4 +15,4 @@ spec:
   parameters:
     targetNamespace: dev
     zkNodes: 1
-    storageGB: 2Gi
+    storageGB: 2

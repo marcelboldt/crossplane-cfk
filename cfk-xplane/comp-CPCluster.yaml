@@ -72,8 +72,8 @@ spec:
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.zkNodes
       toFieldPath: spec.forProvider.manifest.spec.replicas
-    - type: FromCompositeFieldPath
-      fromFieldPath: spec.parameters.storageGB
+   # - type: FromCompositeFieldPath
+   #   fromFieldPath: spec.parameters.storageGB
       toFieldPath: spec.forProvider.manifest.spec.dataVolumeCapacity
   patchSets:
   - name: k8s-targetNamespace
