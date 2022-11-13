@@ -71,7 +71,7 @@ spec:
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.zkNodes
       toFieldPath: spec.forProvider.manifest.spec.replicas
-     - type: FromCompositeFieldPath
+    - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.storageGB
       toFieldPath: spec.forProvider.manifest.spec.dataVolumeCapacity
   patchSets:
