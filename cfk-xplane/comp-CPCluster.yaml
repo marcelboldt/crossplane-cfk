@@ -39,7 +39,7 @@ spec:
           - name: namespaced
             value: "true"
           - name: namespaceList
-            value: "{cp}"
+            value: "{dev}"
           namespace: cfk
   - name: zookeeper
     base:
@@ -63,11 +63,20 @@ spec:
                     init: confluentinc/confluent-init-container:2.2.0
                   dataVolumeCapacity: 1Gi
                   logVolumeCapacity: 1Gi
-        #           authentication:
-        #             type: digest
-        #             jaasConfig:
-        #               secretRef: credential
-        #           tls:
-        #             secretRef: tls-group1
           providerConfigRef:
             name: local
+    patches:
+    - type: PatchSet
+      patchSetName: k8s-tagetNamespace
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.zkNodes
+      toFieldPath: spec.forProvider.manifest.spec.replicas
+     - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.storageGB
+      toFieldPath: spec.forProvider.manifest.spec.dataVolumeCapacity
+  patchSets:
+  - name: k8s-targetNamespace
+    patches:
+      - type: FromCompositeFieldPath
+        fromFieldPath: spec.parameters.targetNamespace
+        toFieldPath: spec.forProvider.manifest.metadata.namespace

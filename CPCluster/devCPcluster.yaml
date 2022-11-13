@@ -13,5 +13,6 @@ spec:
   compositionRef:
     name: local-cp-cluster
   parameters:
+    targetNamespace: dev
     zkNodes: 1
-    storageGB: 2
+    storageGB: 2Gi

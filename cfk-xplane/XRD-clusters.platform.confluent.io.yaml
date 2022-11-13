@@ -31,10 +31,13 @@ spec:
               parameters:
                 type: object
                 properties:
+                  targetNamespace:
+                    type: string
+                    default: confluent
                   zkNodes:
                     type: integer
                   storageGB:
-                    type: integer
+                    type: string
                 required:
                   - zkNodes
                   - storageGB
