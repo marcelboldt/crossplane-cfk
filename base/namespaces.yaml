@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cfk
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev

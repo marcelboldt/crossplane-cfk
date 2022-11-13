@@ -49,8 +49,12 @@ kubectl apply -f devCPcluster.yaml -n dev
 
 ## RBAC
 
-The crossplane providers' service accounts need the rights to talk to the k8s api. This could be achieved by a ClusterRole,
-see file `xp-provider-ClusterRole.yaml`.
+The crossplane providers' service accounts need the rights to talk to the k8s api and create the resources. Crossplane 
+RBAC manager creates, updates and binds ClusterRoles and ClusterRoleBindings. 
+
+Neither a provider nor the crossplane controller has permission to create namespaces in the cluster it is installed into.
+
+See also https://github.com/crossplane/crossplane/blob/master/design/design-doc-rbac-manager.md
 
 
 # Individual components

@@ -5,7 +5,7 @@ apiVersion: xp.platform.confluent.io/v1alpha1
 kind: CPCluster
 metadata:
   # TODO propagate stuff
-  namespace: confluent
+  namespace: dev
   name: dev-cp-cluster
   annotations:
     crossplane.io/external-name: dev
